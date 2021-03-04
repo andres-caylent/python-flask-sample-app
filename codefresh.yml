@@ -21,6 +21,7 @@ steps:
       image_name: my-flask-app
       tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
       dockerfile: Dockerfile
+      registry: docker-hub
     stage: package
   deploy:
     title: Storing Helm chart
