@@ -23,16 +23,17 @@ steps:
       dockerfile: Dockerfile
       registry: docker-hub
     stage: package
-  deploy:
-    title: Storing Helm chart
-    type: helm
-    stage: deploy
-    working_directory: ./python-flask-sample-app
-    arguments:
-      action: push
-      chart_name: charts/python
-      helm_version: 3.0.2
-      kube_context: 'mydemoAkscluster@BizSpark Plus'
+  # deploy:
+  #   title: Storing Helm chart
+  #   type: helm
+  #   stage: deploy
+  #   working_directory: ./python-flask-sample-app
+  #   arguments:
+  #     action: push
+  #     chart_name: charts/python
+  #     release_name: my-python-chart      
+  #     helm_version: 3.0.2
+  #     kube_context: 'moved-terrapin'
   DeployMyChart:
     type: helm
     stage: deploy
@@ -42,7 +43,7 @@ steps:
       chart_name: charts/python
       release_name: my-python-chart
       helm_version: 3.0.2
-      kube_context: 'mydemoAkscluster@BizSpark Plus'
+      kube_context: 'moved-terrapin'
       custom_values:
       - 'buildID=${{CF_BUILD_ID}}'
       - 'image_pullPolicy=Always'
