@@ -10,6 +10,8 @@ steps:
     arguments:
       repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
       revision: '${{CF_REVISION}}'
+    git: "andres-caylent"
+    revision: "with-helm"      
     stage: checkout
   BuildingDockerImage:
     title: Building Docker Image
@@ -29,7 +31,7 @@ steps:
       action: push
       chart_name: charts/python
       helm_version: 3.0.2
-      kube_context: 'mydemoAkscluster@BizSpark Plus'
+      kube_context: 'moved-terrapin'
   DeployMyChart:
     type: helm
     stage: deploy
@@ -39,7 +41,7 @@ steps:
       chart_name: charts/python
       release_name: my-python-chart
       helm_version: 3.0.2
-      kube_context: 'mydemoAkscluster@BizSpark Plus'
+      kube_context: 'moved-terrapin'
       custom_values:
       - 'buildID=${{CF_BUILD_ID}}'
       - 'image_pullPolicy=Always'
